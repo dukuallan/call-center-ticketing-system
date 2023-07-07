@@ -6,7 +6,6 @@ import org.pahappa.systems.ticketing.services.TicketService;
 import org.pahappa.systems.ticketing.services.impl.TicketServiceImpl;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -148,11 +147,35 @@ public class TicketView implements BaseTicketView {
 
     @Override
     public void getTicketsOfStatus() {
+        boolean input = false;
+        while(!input){
+            try {
+                System.out.println("Choose ticket status ");
 
+                for(int i = 0; i<TicketStatus.values().length; i++){
+                    System.out.println( i + " " + TicketStatus.values()[i]);
+                }
+                int selectedStatus = scanner.nextInt();
+                TicketStatus selected = TicketStatus.values()[selectedStatus];
+                List<Ticket> groupTickets = ticketService.getTicketsOfStatus(selected);
+                
+                for (Ticket ticket : groupTickets) {
+                    System.out.println(ticket);      
+                }
+                input = true;
+                
+            } catch (Exception e) {
+                System.out.println("Invalid input.. , try again!");
+                scanner.nextLine();
+            }
+        }   
     }
+
 
     @Override
     public void updateTicket() {
+        
+
 
     }
 
