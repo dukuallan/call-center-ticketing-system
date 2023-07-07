@@ -174,9 +174,28 @@ public class TicketView implements BaseTicketView {
 
     @Override
     public void updateTicket() {
+        boolean input = false;
+        while(!input){
+            try {
+                System.out.println("Select TicketID.. ");
+                int i = 0;
+                List<Ticket> selectedTicket = ticketService.getAllTickets();
+                for (Ticket eachTicket : selectedTicket) {
+                    System.out.println("Ticket ID " + (++i) + ".  " + eachTicket);    
+                } 
+
+                int selectedChoice = scanner.nextInt();
+                ticketService.updateTicket(selectedTicket.get(selectedChoice));
+                input = true;
+                
+            } catch (Exception e) {
+                System.out.println("Invalid input .. try again \n");
+                
+            }
+            
+
+        }
         
-
-
     }
 
     @Override
