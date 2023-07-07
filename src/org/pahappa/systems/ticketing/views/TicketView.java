@@ -6,6 +6,7 @@ import org.pahappa.systems.ticketing.services.TicketService;
 import org.pahappa.systems.ticketing.services.impl.TicketServiceImpl;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -79,27 +80,50 @@ public class TicketView implements BaseTicketView {
         System.out.println("Please describe ticket issue: ");
         ticketObject.setDescription(scanner.nextLine());
         //Ticket Priority
-        System.out.println("Please select ticket priority");
-        List<String> priorityChoice = new ArrayList<String>();
-        priorityChoice.add(0, "Low");
-        priorityChoice.add(1,"Moderate");
-        priorityChoice.add(2, "High");
+        boolean input= false;
+        while(!input){
+            try {
+                System.out.println("Please select ticket priority");
+                List<String> priorityChoice = new ArrayList<String>();
+                priorityChoice.add(0, "Low");
+                priorityChoice.add(1,"Moderate");
+                priorityChoice.add(2, "High");
 
-        for(int i = 0; i<priorityChoice.size(); i++){
-            System.out.println(i + ". " + priorityChoice.get(i));
+                for(int i = 0; i<priorityChoice.size(); i++){
+                    System.out.println(i + ". " + priorityChoice.get(i));
+                }
+                int choiceSelected = scanner.nextInt();
+
+                ticketObject.setPriority(priorityChoice.get(choiceSelected)); 
+                input = true;
+                
+            } catch (Exception e) {
+                System.out.println("Invalid input.. , try again!");
+                scanner.nextLine();
+            }
         }
-        int choiceSelected = scanner.nextInt();
-
-         ticketObject.setPriority(priorityChoice.get(choiceSelected));    
+   
 
         //Ticket Status
-        System.out.println("Choose ticket status ");
 
-        for(int i = 0; i<TicketStatus.values().length; i++){
-            System.out.println( i + " " + TicketStatus.values()[i]);
+        input = false;
+        while(!input){
+            try {
+                System.out.println("Choose ticket status ");
+
+                for(int i = 0; i<TicketStatus.values().length; i++){
+                    System.out.println( i + " " + TicketStatus.values()[i]);
+                }
+                int selectedStatus = scanner.nextInt();
+                ticketObject.setStatus(TicketStatus.values()[selectedStatus].toString());
+                input = true;
+                
+            } catch (Exception e) {
+                System.out.println("Invalid input.. , try again!");
+                scanner.nextLine();
+            }
         }
-        int selectedStatus = scanner.nextInt();
-        ticketObject.setStatus(TicketStatus.values()[selectedStatus].toString());
+        
 
         //Ticket Creation
         
