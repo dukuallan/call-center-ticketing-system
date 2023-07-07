@@ -200,6 +200,26 @@ public class TicketView implements BaseTicketView {
 
     @Override
     public void deleteTicket() {
+        boolean input = false;
+        while(!input){
+            try {
+                System.out.println("Select Ticket ID from ticket lists below..");
+                int i = 0;
+                List<Ticket> selectedTicket = ticketService.getAllTickets();
+                for (Ticket eachTicket : selectedTicket) {
+                    System.out.println("Ticket ID " + (++i) + ".  " + eachTicket);    
+                } 
+
+                int selectedChoice = scanner.nextInt();
+                ticketService.deleteTicket(selectedChoice-1);
+                input = true;
+                
+            } catch (Exception e) {
+                System.out.println("Invalid input .. try again \n");
+                
+            } 
+
+        }
 
     }
 }
