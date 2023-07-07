@@ -80,6 +80,18 @@ public class Ticket {
     }
 
 
+    @Override
+    public String toString() {
+        return "{" +
+            " customerName='" + getCustomerName() + "'" +
+            ", contact='" + getContact() + "'" +
+            ", ticketCategory='" + getTicketCategory() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", priority='" + getPriority() + "'" +
+            "}";
+    }
+
 
 
 
