@@ -1,8 +1,12 @@
 package org.pahappa.systems.ticketing.views;
 
+import org.pahappa.systems.ticketing.constants.TicketStatus;
+import org.pahappa.systems.ticketing.models.Ticket;
 import org.pahappa.systems.ticketing.services.TicketService;
 import org.pahappa.systems.ticketing.services.impl.TicketServiceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TicketView implements BaseTicketView {
@@ -60,11 +64,59 @@ public class TicketView implements BaseTicketView {
 
     @Override
     public void createTicket() {
+        Ticket ticketObject = new Ticket();
+        System.out.println("Please create ticket");
+        //Customer name
+        System.out.println("Enter customer name: ");
+        ticketObject.setCustomerName(scanner.nextLine());
+        //Contact
+        System.out.println("Enter contact: ");
+        ticketObject.setContact(scanner.nextLine());
+        //Ticket Category
+        System.out.println("Enter ticket Category: ");
+        ticketObject.setTicketCategory(scanner.nextLine());
+        //Ticket issue
+        System.out.println("Please describe ticket issue: ");
+        ticketObject.setDescription(scanner.nextLine());
+        //Ticket Priority
+        System.out.println("Please select ticket priority");
+        List<String> priorityChoice = new ArrayList<String>();
+        priorityChoice.add(0, "Low");
+        priorityChoice.add(1,"Moderate");
+        priorityChoice.add(2, "High");
 
+        for(int i = 0; i<priorityChoice.size(); i++){
+            System.out.println(i + ". " + priorityChoice.get(i));
+        }
+        int choiceSelected = scanner.nextInt();
+
+         ticketObject.setPriority(priorityChoice.get(choiceSelected));    
+
+        //Ticket Status
+        System.out.println("Choose ticket status ");
+
+        for(int i = 0; i<TicketStatus.values().length; i++){
+            System.out.println( i + " " + TicketStatus.values()[i]);
+        }
+        int selectedStatus = scanner.nextInt();
+        ticketObject.setStatus(TicketStatus.values()[selectedStatus].toString());
+
+        //Ticket Creation
+        
+
+        Ticket ticket = new Ticket(ticketObject.getCustomerName(), ticketObject.getContact(),
+                                    ticketObject.getTicketCategory(), ticketObject.getDescription(), 
+                                    ticketObject.getStatus(), ticketObject.getPriority());
+        
+        ticketService.createTicket(ticket);
+        
     }
+    
 
     @Override
     public void getAllTickets() {
+        
+         
 
     }
 
