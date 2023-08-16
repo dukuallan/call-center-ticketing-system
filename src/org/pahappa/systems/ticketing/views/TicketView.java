@@ -139,9 +139,11 @@ public class TicketView implements BaseTicketView {
 
     @Override
     public void getAllTickets() {
-        
+        for (Ticket eachTicket : ticketService.getAllTickets()) {
+            System.out.println(eachTicket);
+            
+        } 
          
-
     }
 
     @Override

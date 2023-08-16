@@ -16,7 +16,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getAllTickets() {
-        return null;
+        return ticketList;
     }
 
     @Override
