@@ -6,6 +6,7 @@ import org.pahappa.systems.ticketing.services.TicketService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TicketServiceImpl implements TicketService {
     List<Ticket> ticketList = new ArrayList<>();
@@ -34,6 +35,32 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void updateTicket(Ticket updatedTicket) {
+        System.out.println("Selected the attribute to update..");
+        System.out.println("\n 1. status ");
+        Scanner scanner = new Scanner(System.in);
+        int selectedValue = scanner.nextInt();
+        if(selectedValue == 1){
+        boolean input = false;
+        while(!input){
+            try {
+                System.out.println("Choose ticket status ");
+
+                for(int i = 0; i<TicketStatus.values().length; i++){
+                    System.out.println( i + " " + TicketStatus.values()[i]);
+                }
+                int selectedStatus = scanner.nextInt();
+                updatedTicket.setStatus(TicketStatus.values()[selectedStatus].toString());
+                ticketList.set(ticketList.indexOf(updatedTicket), updatedTicket);
+
+                input = true;
+                
+            } catch (Exception e) {
+                System.out.println("Invalid input.. , try again!");
+                scanner.nextLine();
+            }
+        }
+            
+        }
 
     }
 
