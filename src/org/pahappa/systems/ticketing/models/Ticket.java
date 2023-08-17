@@ -7,18 +7,17 @@ package org.pahappa.systems.ticketing.models;
  * related to the user's request or issue.
  */
 public class Ticket {
-    String customerName;
-    String contact;
-    String ticketCategory;
-    String description;
-    String status;
-    String priority;
+    private String customerName;
+    private String contact;
+    private String ticketCategory;
+    private String description;
+    private String status;
+    private String priority;
 
 
     public Ticket() {
     }
-
-    
+      
     public Ticket(String customerName, String contact, String ticketCategory, String description, String status,
             String priority) {
         this.customerName = customerName;
